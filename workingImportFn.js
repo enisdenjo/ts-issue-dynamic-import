@@ -1,9 +1,8 @@
 "use strict";
-var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.importFn = void 0;
-/** 🛑 doesn't work */
-async function importFn(path) {
+exports.workingImportFn = void 0;
+async function workingImportFn(path) {
+    var _a;
     return _a = path, Promise.resolve().then(() => require(_a));
 }
-exports.importFn = importFn;
+exports.workingImportFn = workingImportFn;

@@ -1,15 +1,35 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const broken_importFn_1 = require("./broken-importFn");
-// import { importFn } from "./working-importFn";
-Promise.all(["idontexist-1", "idontexist-2"].map(async (name) => {
-    try {
-        await (0, broken_importFn_1.importFn)(name);
-    }
-    catch (err) {
-        throw new Error(`Unable to import package ${name}: ${err.stack}`);
-    }
-})).catch((err) => {
-    console.log(err);
-    process.exit(1);
-});
+function test(importFn) {
+  return Promise.all(
+    ["idontexist-1", "idontexist-2"].map(async (name) => {
+      try {
+        await importFn(name);
+      } catch (err) {
+        if (!err.message.includes(name)) {
+          throw `Error message unrelated to import of "${name}", got: "${err.message}"`;
+        }
+      }
+    })
+  );
+}
+
+// ✅
+const { workingImportFn } = require("./workingImportFn");
+test(workingImportFn)
+  .then(() => {
+    console.log("No problem with workingImportFn");
+  })
+  .catch((err) => {
+    console.log("Problem with workingImportFn");
+    console.error(err);
+  });
+
+// 🛑
+const { brokenImportFn } = require("./brokenImportFn");
+test(brokenImportFn)
+  .then(() => {
+    console.log("No problem with brokenImportFn");
+  })
+  .catch((err) => {
+    console.log("Problem with brokenImportFn");
+    console.error(err);
+  });
