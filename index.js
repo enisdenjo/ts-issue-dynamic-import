@@ -12,24 +12,17 @@ function test(importFn) {
   );
 }
 
-// ✅
-const { workingImportFn } = require("./workingImportFn");
-test(workingImportFn)
-  .then(() => {
-    console.log("No problem with workingImportFn");
-  })
-  .catch((err) => {
-    console.log("Problem with workingImportFn");
-    console.error(err);
-  });
+(async () => {
+  // ✅
+  const { workingImportFn } = require("./workingImportFn");
+  await test(workingImportFn);
+  console.log("No problem with workingImportFn");
 
-// 🛑
-const { brokenImportFn } = require("./brokenImportFn");
-test(brokenImportFn)
-  .then(() => {
-    console.log("No problem with brokenImportFn");
-  })
-  .catch((err) => {
-    console.log("Problem with brokenImportFn");
-    console.error(err);
-  });
+  // 🛑
+  const { brokenImportFn } = require("./brokenImportFn");
+  await test(brokenImportFn);
+  console.log("No problem with brokenImportFn");
+})().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
