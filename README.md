@@ -11,12 +11,12 @@ export async function brokenImportFn(path: string) {
 }
 
 // brokenImportFn.js
-("use strict");
-var _a; // 👈
+"use strict";
+var _a; // 👈 outside func scope
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.brokenImportFn = void 0;
 async function brokenImportFn(path) {
-  return (_a = path), Promise.resolve().then(() => require(_a));
+    return _a = path, Promise.resolve().then(() => require(_a));
 }
 exports.brokenImportFn = brokenImportFn;
 ```
@@ -31,12 +31,12 @@ async function workingImportFn(path: string) {
 export { workingImportFn };
 
 // workingImportFn.js
-("use strict");
+"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.workingImportFn = void 0;
 async function workingImportFn(path) {
-  var _a; // 👈
-  return (_a = path), Promise.resolve().then(() => require(_a));
+    var _a; // 👈 inside func scope
+    return _a = path, Promise.resolve().then(() => require(_a));
 }
 exports.workingImportFn = workingImportFn;
 ```
