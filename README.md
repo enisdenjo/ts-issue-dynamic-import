@@ -1,4 +1,4 @@
-# Repro for TypeScript issue #\<number\>
+# Repro for [TypeScript issue #51696](https://github.com/microsoft/TypeScript/issues/51696)
 
 This repository contains a reproduction of a regression introduced after [microsoft/TypeScript#49663](https://github.com/microsoft/TypeScript/pull/49663) has landed.
 
