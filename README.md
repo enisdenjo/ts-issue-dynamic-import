@@ -44,3 +44,5 @@ exports.workingImportFn = workingImportFn;
 This variable outside the function's scope (1st approach with [brokenImportFn.ts](brokenImportFn.ts)) will cause problems when importing multiple modules in "parallel" (using `Promise.all` for example).
 
 **Please check the [index.js](index.js) for exact details and repro.**
+
+Also, I've set up a [CI](.github/workflows/ci.yml) to run - you can see [it failing in the Actions tab](https://github.com/enisdenjo/ts-issue-dynamic-import/actions).
